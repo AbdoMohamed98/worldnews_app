@@ -24,7 +24,7 @@ class Worldnews_app extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: const Size(430, 923),
       minTextAdapt: true,
       builder: (context, child) {
         return MaterialApp.router(
