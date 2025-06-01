@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:worldnews_app/core/navigation/router_generation_config.dart';
 
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -36,7 +37,7 @@ class Worldnews_app extends StatelessWidget {
           routerConfig: RouterGenerationConfig.router,
         );
       },
-      child: const SizedBox(),
+     
     );
   }
 }

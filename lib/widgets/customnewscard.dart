@@ -1,13 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart'; // For dynamic date formatting
 
-class NewsCard extends StatelessWidget {
+class Customnewscard extends StatelessWidget {
   final String title;
   final String author;
   final String imageUrl;
   final DateTime date;
 
-  const NewsCard({
+  const Customnewscard({
     super.key,
     required this.title,
     required this.author,
@@ -17,18 +19,16 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat("MMMM d, y").format(date); // e.g. May 3, 2023
+    String formattedDate = DateFormat("MMMM d, y").format(date);
 
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        side: BorderSide(color: Colors.purpleAccent, width: 2),
-      ),
+    return Container(
+      height: 100.h,
+      width: double.infinity,
+     
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          children: [
-            // Left content
+          children: [ 
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +38,7 @@ class NewsCard extends StatelessWidget {
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 20),
                   Text(
                     "$author · $formattedDate",
                     style: TextStyle(color: Colors.grey[600], fontSize: 12),
@@ -47,16 +47,13 @@ class NewsCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            // Right image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                imageUrl,
-                width: 80,
-                height: 60,
-                fit: BoxFit.cover,
-              ),
-            ),
+            
+      Container(
+          width: 80.w,
+          height: 100.h,
+              child: CachedNetworkImage(imageUrl: imageUrl,
+              )
+      )
           ],
         ),
       ),
