@@ -8,7 +8,7 @@ import 'package:worldnews_app/views/searchview.dart';
 
 class RouterGenerationConfig {
   static GoRouter router = GoRouter(
-    initialLocation: Approutes.searchresultsview,
+    initialLocation: Approutes.articleview,
     routes: [
       GoRoute(path: Approutes.homeview,
       name:Approutes.homeview ,

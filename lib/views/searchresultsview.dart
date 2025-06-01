@@ -9,8 +9,11 @@ class Searchresultsview extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Search Results'),
+        centerTitle: true,
       ),
-   body: Customnewscard(title: 'fkdfnfgklf', author: 'ndsmdf', imageUrl: 'https://static.vecteezy.com/vite/assets/photo-masthead-375-BoK_p8LG.webp', date: DateTime.now(),
-    ));
+   body:ListView.builder(itemBuilder: (context, index) =>Customnewscard(title: 'fkdfnfgklf', author: 'ndsmdf', imageUrl: 'https://static.vecteezy.com/vite/assets/photo-masthead-375-BoK_p8LG.webp', date: DateTime.now(),
+   ))
+   
+    );
   }
 }
