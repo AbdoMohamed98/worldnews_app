@@ -22,35 +22,51 @@ class Customnewscard extends StatelessWidget {
     String formattedDate = DateFormat("MMMM d, y").format(date);
 
     return Container(
-      height: 100.h,
-      width: double.infinity,
+      height: 85.h,
+      width: 366.w,
      
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [ 
-            Expanded(
+            SizedBox(
+              width: 238.w,
+              height: 70.h,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  SizedBox(
+                    width: 238.w,
+                    height: 48.h,
+                    
+                    child: Text(
+
+                      title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold,),
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                  Text(
-                    "$author · $formattedDate",
-                    style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                  
+                  SizedBox(
+                    width: 134.w,
+                    height: 18.h,
+                    child: Text(
+                      "$author · $formattedDate",
+                      style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                    ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(width: 10),
+            Spacer(flex: 1),
             
-      Container(
-          width: 80.w,
-          height: 100.h,
+            
+      SizedBox(
+          width: 105.w,
+          height: 80.h,
               child: CachedNetworkImage(imageUrl: imageUrl,
               )
       )

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:worldnews_app/widgets/customcategorybutton.dart';
+import 'package:worldnews_app/widgets/customnewscard.dart';
 
 class Homeview extends StatefulWidget {
   const Homeview({super.key});
@@ -26,100 +27,104 @@ class _HomeviewState extends State<Homeview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Explore',
-          style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              // Implement search functionality
-            },
-          ),
-         
-          
-        ],
-      ),
+      
+
       body: Column(
         children: [
-          SizedBox(
-            height:50.h,
-            child: ListView.builder(itemBuilder: (context, index) =>Customcategorybutton(Category:categories[index] ) , itemCount: categories.length, shrinkWrap: true, physics: BouncingScrollPhysics())),
-            Column(
+          Container(
+            height: 59.h,
+            width: double.infinity,
+            color: Color(0xffE9EEFA),
+          ),
+          Container(
+            height: 68.h,
+            color: Color(0xffE9EEFA),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              
               children: [
-                Image.asset(
-                  'assets/mages/irtualimage.png',
-                  width: double.infinity,
-                  height: 200.h,
-                  fit: BoxFit.cover,
+            
+                Padding(
+                  padding:  EdgeInsets.only(left: 32.h),
+                  child: Text('Explore',style:TextStyle(
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight. w600,
+                
+                  )  ,),
                 ),
-                Text(
-                  'Welcome to World News',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-
-                ),
-                Text(
-                  formattedDate,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.grey,
-                  ),
-                ),
-                ListView.builder(
-                  itemCount: 10, // Replace with your news items count
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                        side: BorderSide(color: Colors.purpleAccent, width: 2),
+                IconButton(onPressed: (){}, icon: Icon(Icons.search)),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 12.h,
+          ),
+          Padding(
+            padding:  EdgeInsets.only(left: 32.h),
+            child: SizedBox(
+              height:50.h,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  return Customcategorybutton(
+                    Category: categories[index],
+                    onPressed: () {
+                   
+                    },
+                  );
+                },
+              ),),
+          ),
+              
+            Padding(
+              padding: EdgeInsets.only( top: 16.h,bottom: 16.h),
+              child: SizedBox(
+              height: 292.h,
+              width: 366.h,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      'assets/images/virtualimage.png',
+                      width: double.infinity,
+                      height: 206.h,
+                      fit: BoxFit.cover,
+                    ),
+                    Padding(
+                      
+                      padding: const EdgeInsets.only( top: 8.0),
+                      child: Text(
+                        'Welcome to World News',
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                                      
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'News Title $index',
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(height: 4),
-                                  Text(
-                                    'Author Name · $formattedDate',
-                                    style: TextStyle(color: Colors.grey[600], fontSize: 12),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(
-                                'https://via.placeholder.com/80x60', // Replace with your image URL
-                                width: 80,
-                                height: 60,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only( top: 6.h, bottom: 2.h),
+                      child: Text(
+                        formattedDate,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.grey,
                         ),
                       ),
-                    );
-                  },
-                )
-              ],
-            )
-        ],
-      ),
-    );
+                    ),
+                   
+                    
+                  ],
+                ),
+              ),
+              
+            ),
+                    SingleChildScrollView(child: Customnewscard(title: 'fghlfegdfgewdgfejlfgedlfgdjljfgdjgfejdhgfjlehgfelfgelgflddsgfgtg', author: 'g4r4tt4', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPjasn-8EECz9w5rcUPPbKc1Zm77HFjqHlg&s', date: DateTime.now())),
+
+            
+        
+    ]));
+  
   }
 }
