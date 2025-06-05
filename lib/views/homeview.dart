@@ -3,11 +3,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:worldnews_app/helper/api.dart';
 import 'package:worldnews_app/models/newsabouteverything.dart';
 import 'package:worldnews_app/widgets/customcategorybutton.dart';
 import 'package:worldnews_app/widgets/customnewscard.dart';
+import 'package:worldnews_app/widgets/customtextfield.dart';
 
 class Homeview extends StatefulWidget {
   const Homeview({super.key});
@@ -27,6 +29,8 @@ class _HomeviewState extends State<Homeview> {
     'World',
   ];
   String formattedDate = DateFormat("MMMM d . y").format(DateTime.now());
+  bool showSearchField = false;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,27 @@ class _HomeviewState extends State<Homeview> {
                 
                   )  ,),
                 ),
-                IconButton( onPressed:(){}, icon: Icon(Icons.search)),
+                showSearchField ?
+                Padding(
+                  padding: const EdgeInsets.only(left: 32.0),
+                  child: SizedBox(
+                    width: 200.w,
+                    height: 52.h,
+                    child: Customtextfield(hintText: 'Search', onChanged:(value){} ,
+                     textfieldbordercolor: Colors.grey, // ✅ this makes the border visible
+                      textfieldborderradius: 12.r,       // optional: for rounded corners
+                      customtextfieldhintcolor: Colors.grey,
+                    )),
+                ):SizedBox.shrink(),
+               IconButton(
+  onPressed: () {
+  setState(() {
+    showSearchField= !showSearchField;
+  });
+  },
+  icon: Icon(Icons.search),
+),
+
               ],
             ),
           ),
@@ -143,13 +167,25 @@ class _HomeviewState extends State<Homeview> {
           itemCount: newsList.length,
           itemBuilder: (context, index) {
             final news = newsList[index];
-            return Customnewscard(
-              title: news.title,
-              author: news.author ,
-              imageUrl: news.urltoimage,
-              date: news.date != null
-                  ? DateTime.parse(news.date)
-                  : DateTime.now(),
+            return GestureDetector(
+              onTap: () {
+                context.pushNamed('/Articleview', queryParameters: {
+                  'title': news.title,
+                  'author': news.author,
+                  'imageUrl': news.urltoimage,
+                  'date': news.date ?? DateTime.now(),
+                  'decription': news.description ,
+                 
+                });
+              },
+              child: Customnewscard(
+                title: news.title,
+                author: news.author ,
+                imageUrl: news.urltoimage,
+                date: news.date != null
+                    ? DateTime.parse(news.date)
+                    : DateTime.now(),
+              ),
             );
           },
         ),

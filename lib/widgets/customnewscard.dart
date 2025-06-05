@@ -7,15 +7,21 @@ class Customnewscard extends StatelessWidget {
   final String title;
   final String author;
   final String imageUrl;
+ 
   final DateTime date;
 
-  const Customnewscard({
+
+  const Customnewscard(
+   
+    {
     super.key,
     required this.title,
     required this.author,
     required this.imageUrl,
     required this.date,
-  });
+  }
+
+  );
 
   @override
   Widget build(BuildContext context) {
