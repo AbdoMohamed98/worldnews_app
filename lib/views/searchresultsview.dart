@@ -7,12 +7,38 @@ class Searchresultsview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Search Results'),
-        centerTitle: true,
+     
+   body:Column(
+    children: [
+      Container(
+        height: 40,
+        width: double.infinity,
+  
       ),
-   body:ListView.builder(itemBuilder: (context, index) =>Customnewscard(title: 'fkdfnfgklf', author: 'ndsmdf', imageUrl: 'https://static.vecteezy.com/vite/assets/photo-masthead-375-BoK_p8LG.webp', date: DateTime.now(),
-   ))
+      Container(
+        height: 68,
+        
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+                'Search Results',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            
+          ])),
+          Expanded(
+            child: Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                 child: ListView.builder(itemBuilder: (context, index) =>Customnewscard(title: 'fkdfnfgklf', author: 'ndsmdf', imageUrl: 'https://static.vecteezy.com/vite/assets/photo-masthead-375-BoK_p8LG.webp', date: DateTime.now(),
+                 )),
+               ),
+          )
+    ],
+   )
    
     );
   }

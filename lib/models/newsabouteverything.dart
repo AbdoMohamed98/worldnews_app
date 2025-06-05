@@ -2,8 +2,9 @@ class Newsabouteverything {
   final String title;
   final String description;
   final String urltoimage;
+  final String author;
   final dynamic date;
-  Newsabouteverything({
+Newsabouteverything({required this.author, 
     required this.title,
     required this.description,
     required this.urltoimage,
@@ -14,6 +15,7 @@ class Newsabouteverything {
       title: json['title'] ?? '',
       description: json['description'] ?? '',
       urltoimage: json['urlToImage'] ?? '',
+      author: json['author'] ?? 'Unknown',
       date: json['publishedAt'] ?? '',
     );
   }

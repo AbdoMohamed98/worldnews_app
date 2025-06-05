@@ -1,7 +1,11 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:worldnews_app/helper/api.dart';
+import 'package:worldnews_app/models/newsabouteverything.dart';
 import 'package:worldnews_app/widgets/customcategorybutton.dart';
 import 'package:worldnews_app/widgets/customnewscard.dart';
 
@@ -52,7 +56,7 @@ class _HomeviewState extends State<Homeview> {
                 
                   )  ,),
                 ),
-                IconButton(onPressed: (){}, icon: Icon(Icons.search)),
+                IconButton( onPressed:(){}, icon: Icon(Icons.search)),
               ],
             ),
           ),
@@ -78,7 +82,7 @@ class _HomeviewState extends State<Homeview> {
           ),
               
             Padding(
-              padding: EdgeInsets.only( top: 16.h,bottom: 16.h),
+              padding: EdgeInsets.only( top: 16.h,bottom: 16.h, left: 16.h, right: 16.h),
               child: SizedBox(
               height: 292.h,
               width: 366.h,
@@ -120,7 +124,39 @@ class _HomeviewState extends State<Homeview> {
               ),
               
             ),
-                    SingleChildScrollView(child: Customnewscard(title: 'fghlfegdfgewdgfejlfgedlfgdjljfgdjgfejdhgfjlehgfelfgelgflddsgfgtg', author: 'g4r4tt4', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPjasn-8EECz9w5rcUPPbKc1Zm77HFjqHlg&s', date: DateTime.now())),
+                   Expanded(
+  child: FutureBuilder(
+    future: GetNews().getWorldNews(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (snapshot.hasError) {
+        return const Center(child: Text('Error loading news'));
+      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        return const Center(child: Text('No news found.'));
+      }
+
+      final newsList = snapshot.data!;
+      return Padding(
+        padding: EdgeInsets.only(left: 16.h, right: 16.h),
+        child: ListView.builder(
+          itemCount: newsList.length,
+          itemBuilder: (context, index) {
+            final news = newsList[index];
+            return Customnewscard(
+              title: news.title,
+              author: news.author ,
+              imageUrl: news.urltoimage,
+              date: news.date != null
+                  ? DateTime.parse(news.date)
+                  : DateTime.now(),
+            );
+          },
+        ),
+      );
+    },
+  ),
+),
 
             
         

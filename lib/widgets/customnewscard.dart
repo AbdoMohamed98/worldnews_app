@@ -26,7 +26,7 @@ class Customnewscard extends StatelessWidget {
       width: 366.w,
      
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
         child: Row(
           children: [ 
             SizedBox(
@@ -64,11 +64,20 @@ class Customnewscard extends StatelessWidget {
             Spacer(flex: 1),
             
             
-      SizedBox(
+      Container(
           width: 105.w,
           height: 80.h,
-              child: CachedNetworkImage(imageUrl: imageUrl,
-              )
+          
+             
+            
+               child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                 child: CachedNetworkImage(
+                  
+                  imageUrl: imageUrl,
+                  fit: BoxFit.fill,
+                               ),
+               ),
       )
           ],
         ),

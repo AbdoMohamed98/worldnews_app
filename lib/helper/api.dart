@@ -1,20 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:worldnews_app/models/newsabouteverything.dart';
 
- class Getnews {
-  
 
- 
 
-final dio = Dio();
+class GetNews {
+  final Dio dio = Dio();
 
- Future<List<Newsabouteverything>> getworldnews() async {
-  final response = await dio.get('https://newsapi.org/v2/everything?q=Apple&from=2025-05-1&sortBy=popularity&apiKey=975d877bc37d4fe99baf722a7d90ad82');
-  List<dynamic> data = response.data['articles'];
-  List<Newsabouteverything> worldnews = [];
-  for (var item in data) {
-    worldnews.add(Newsabouteverything.fromJson(item));
+  Future<List<Newsabouteverything>> getWorldNews() async {
+    try {
+      final response = await dio.get(
+     'https://newsapi.org/v2/everything?q=apple&from=2025-06-04&to=2025-06-04&sortBy=popularity&apiKey=975d877bc37d4fe99baf722a7d90ad82'
+      );
+
+      final List<dynamic> data = response.data['articles'];
+      return data.map((item) => Newsabouteverything.fromJson(item)).toList();
+    } catch (e) {
+      print('Error fetching news: $e');
+      return [];
+    }
   }
-  return worldnews;
-}
 }
